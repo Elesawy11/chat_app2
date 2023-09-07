@@ -64,7 +64,7 @@ class RegisterViewForm extends StatelessWidget {
                     ),
                     CustomTextFormField(
                       hintText: 'email',
-                      icon: Icons.mail,
+                      prefixIcon: Icons.mail,
                       onChanged: (value) {
                         email = value;
                       },
@@ -74,7 +74,7 @@ class RegisterViewForm extends StatelessWidget {
                     ),
                     CustomTextFormField(
                       hintText: 'password',
-                      icon: Icons.lock,
+                      prefixIcon: Icons.lock,
                       onChanged: (value) {
                         password = value;
                       },

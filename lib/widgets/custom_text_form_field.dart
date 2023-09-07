@@ -5,12 +5,16 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     this.onChanged,
     this.hintText,
-    this.icon,  this.obscureText = false,
+    this.prefixIcon,
+    this.obscureText = false,
+    this.suffixIcon, this.onPressedSuffix,
   });
   final void Function(String)? onChanged;
   final String? hintText;
-  final IconData? icon;
-  final bool obscureText ;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final bool obscureText;
+  final void Function()? onPressedSuffix;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +29,15 @@ class CustomTextFormField extends StatelessWidget {
       onChanged: onChanged,
       decoration: InputDecoration(
         prefixIcon: Icon(
-          icon,
+          prefixIcon,
           color: Colors.black,
+        ),
+        suffixIcon: IconButton(
+          onPressed:onPressedSuffix,
+          icon: Icon(
+            suffixIcon,
+            color: Colors.black,
+          ),
         ),
         hintText: hintText,
         border: OutlineInputBorder(
