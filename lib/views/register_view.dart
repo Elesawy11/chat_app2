@@ -1,6 +1,7 @@
 import 'package:chat_app2/cubits/register_cubit/register_cubit.dart';
 import 'package:chat_app2/views/chat_view.dart';
 import 'package:chat_app2/widgets/register_view_form.dart';
+import 'package:chat_app2/widgets/show_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,8 +24,7 @@ class RegisterView extends StatelessWidget {
             Navigator.pushNamed(context, ChatView.id);
             isLoading = false;
           } else if (state is RegisterFailure) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.errMessage)));
+            showSnackBar(context, state.errMessage);
             isLoading = false;
           }
         },

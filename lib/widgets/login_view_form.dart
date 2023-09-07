@@ -1,17 +1,17 @@
-import 'package:chat_app2/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-import '../cubits/register_cubit/register_cubit.dart';
+import '../cubits/login_cubit/cubit/login_cubit.dart';
+import '../views/register_view.dart';
 import 'custom_text_form_field.dart';
 
 // ignore: must_be_immutable
-class RegisterViewForm extends StatelessWidget {
-  RegisterViewForm({super.key, required this.isLoading});
-  String? email, password;
-  final GlobalKey<FormState> formKey = GlobalKey();
+class LoginViewForm extends StatelessWidget {
+  LoginViewForm({super.key, required this.isLoading});
   final bool isLoading;
+  String? email, password;
+  GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +72,7 @@ class RegisterViewForm extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextFormField(
+                      obscureText: true,
                       hintText: 'password',
                       icon: Icons.lock,
                       onChanged: (value) {
@@ -82,10 +83,10 @@ class RegisterViewForm extends StatelessWidget {
                       height: 60,
                     ),
                     GestureDetector(
-                      onTap: () async {
+                      onTap: () {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<RegisterCubit>(context)
-                              .registerUser(email: email!, password: password!);
+                          BlocProvider.of<LoginCubit>(context)
+                              .loginUser(email: email!, password: password!);
                         }
                       },
                       child: Container(
@@ -96,7 +97,7 @@ class RegisterViewForm extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16)),
                         child: const Center(
                           child: Text(
-                            'Register',
+                            'Login',
                             style: TextStyle(fontSize: 24, fontFamily: 'Kanit'),
                           ),
                         ),
@@ -109,15 +110,15 @@ class RegisterViewForm extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'have an acount..   ',
+                          'don\'t have an acount?  ',
                           style: TextStyle(fontSize: 16),
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, LoginView.id);
+                            Navigator.pushNamed(context, RegisterView.id);
                           },
                           child: const Text(
-                            'Login',
+                            'Register',
                             style: TextStyle(
                                 fontFamily: 'Kanit',
                                 color: Color(0xff887BB0),

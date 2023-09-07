@@ -1,3 +1,5 @@
+import 'package:chat_app2/cubits/login_cubit/cubit/login_cubit.dart';
+import 'package:chat_app2/simple_bloc_observer.dart';
 import 'package:chat_app2/views/chat_view.dart';
 import 'package:chat_app2/views/login_view.dart';
 import 'package:chat_app2/views/register_view.dart';
@@ -12,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Bloc.observer = SimpleBlocObserver();
   runApp(const ChatApp());
 }
 
@@ -24,11 +27,13 @@ class ChatApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => RegisterCubit(),
-        )
+        ),BlocProvider(
+          create: (context) => LoginCubit(),
+        ),
       ],
       child: MaterialApp(
         routes: {
-          LoginView.id: (context) => const LoginView(),
+          LoginView.id: (context) =>  LoginView(),
           RegisterView.id: (context) => RegisterView(),
           ChatView.id: (context) => const ChatView(),
         },
