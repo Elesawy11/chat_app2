@@ -1,4 +1,5 @@
 import 'package:chat_app2/views/login_view.dart';
+import 'package:chat_app2/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -81,26 +82,14 @@ class RegisterViewForm extends StatelessWidget {
                     const SizedBox(
                       height: 60,
                     ),
-                    GestureDetector(
-                      onTap: () async {
+                    CustomButton(
+                      text: 'Register',
+                      onTap: () {
                         if (formKey.currentState!.validate()) {
                           BlocProvider.of<RegisterCubit>(context)
                               .registerUser(email: email!, password: password!);
                         }
                       },
-                      child: Container(
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: const Color(0xff887BB0),
-                            borderRadius: BorderRadius.circular(16)),
-                        child: const Center(
-                          child: Text(
-                            'Register',
-                            style: TextStyle(fontSize: 24, fontFamily: 'Kanit'),
-                          ),
-                        ),
-                      ),
                     ),
                     const SizedBox(
                       height: 8,
