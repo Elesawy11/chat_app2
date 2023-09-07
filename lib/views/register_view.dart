@@ -1,9 +1,8 @@
-import 'package:chat_app2/views/register_view.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
-  static String id = ' Login View';
+class RegisterView extends StatelessWidget {
+  const RegisterView({super.key});
+  static String id = 'Register View';
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +101,7 @@ class LoginView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16)),
                     child: const Center(
                       child: Text(
-                        'Login',
+                        'Register',
                         style: TextStyle(fontSize: 24, fontFamily: 'Kanit'),
                       ),
                     ),
@@ -111,24 +110,19 @@ class LoginView extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                 Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-               const     Text(
-                      'don\'t have an acount?  ',
+                    Text(
+                      'have an acount..   ',
                       style: TextStyle(fontSize: 16),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, RegisterView.id);
-                      },
-                      child:const Text(
-                        'Register',
-                        style: TextStyle(
-                            fontFamily: 'Kanit',
-                            color: Color(0xff887BB0),
-                            fontSize: 18),
-                      ),
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                          fontFamily: 'Kanit',
+                          color: Color(0xff887BB0),
+                          fontSize: 18),
                     )
                   ],
                 )
