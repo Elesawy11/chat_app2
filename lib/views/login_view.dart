@@ -6,96 +6,128 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-          const  SizedBox(height: 120,),
-            Image.asset('assets/images/scholar.png'),
-          const  SizedBox(height: 60,),
-
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Color(0xffFAE8E0), Color(0xffD8A7B1)],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Welcome To',
-                  style: TextStyle(fontSize: 24),
+                const SizedBox(
+                  height: 120,
                 ),
-                Text(
-                  ' Scholar Chat',
-                  style: TextStyle(fontSize: 24, fontFamily: 'Kanit'),
+                Image.asset('assets/images/scholar.png'),
+                const SizedBox(
+                  height: 60,
                 ),
-              ],
-            ),
-          const  SizedBox(height: 60,),
-
-            TextFormField(
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  Icons.mail,
-                  color: Colors.black,
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Welcome To',
+                      style: TextStyle(fontSize: 24, color: Color(0xff887BB0)),
+                    ),
+                    Text(
+                      ' Scholar Chat',
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontFamily: 'Kanit',
+                          color: Color(0xff887BB0)),
+                    ),
+                  ],
                 ),
-                hintText: 'email',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
+                const SizedBox(
+                  height: 60,
                 ),
-                enabledBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-                focusedBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-              ),
-            ),
-          const  SizedBox(height: 20,),
-
-            TextFormField(
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  Icons.lock,
-                  color: Colors.black,
-                ),
-                hintText: 'password',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                enabledBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-                focusedBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-              ),
-            ),
-          const  SizedBox(height: 60,),
-
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: const Color(0xff887BB0),
-                    borderRadius: BorderRadius.circular(16)),
-                child: const Center(
-                  child: Text(
-                    'Login',
-                    style: TextStyle(fontSize: 24, fontFamily: 'Kanit'),
+                TextFormField(
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(
+                      Icons.mail,
+                      color: Colors.black,
+                    ),
+                    hintText: 'email',
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Color(0xff887BB0)),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xff887BB0)),
+                        borderRadius: BorderRadius.circular(16)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xff887BB0)),
+                        borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
-              ),
-            ),
-          const  SizedBox(height: 8,),
-
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('don\'t have an acount?  '),
-                Text(
-                  'Register',
-                  style: TextStyle(fontFamily: 'Kanit'),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(
+                      Icons.lock,
+                      color: Colors.black,
+                    ),
+                    hintText: 'password',
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Color(0xff887BB0)),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xff887BB0)),
+                        borderRadius: BorderRadius.circular(16)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xff887BB0)),
+                        borderRadius: BorderRadius.circular(16)),
+                  ),
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: const Color(0xff887BB0),
+                        borderRadius: BorderRadius.circular(16)),
+                    child: const Center(
+                      child: Text(
+                        'Login',
+                        style: TextStyle(fontSize: 24, fontFamily: 'Kanit'),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'don\'t have an acount?  ',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Text(
+                      'Register',
+                      style: TextStyle(
+                          fontFamily: 'Kanit',
+                          color: Color(0xff887BB0),
+                          fontSize: 18),
+                    )
+                  ],
                 )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
