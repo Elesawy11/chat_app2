@@ -1,3 +1,4 @@
+import 'package:chat_app2/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
@@ -9,6 +10,9 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const MaterialApp(
+      
+      home: LoginView(),
+    );
   }
 }
