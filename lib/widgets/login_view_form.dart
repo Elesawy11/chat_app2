@@ -8,25 +8,22 @@ import '../views/register_view.dart';
 import 'custom_text_form_field.dart';
 
 // ignore: must_be_immutable
-class LoginViewForm extends StatefulWidget {
-  LoginViewForm({super.key, required this.isLoading});
+
+class LoginViewForm extends StatelessWidget {
   final bool isLoading;
 
-  @override
-  State<LoginViewForm> createState() => _LoginViewFormState();
-}
-
-class _LoginViewFormState extends State<LoginViewForm> {
   String? email, password;
 
   GlobalKey<FormState> formKey = GlobalKey();
 
-  bool obscureText = true;
+  LoginViewForm({super.key, this.isLoading = false});
+
+  // bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      inAsyncCall: widget.isLoading,
+      inAsyncCall: isLoading,
       child: Scaffold(
         body: Container(
           height: double.infinity,
@@ -84,12 +81,12 @@ class _LoginViewFormState extends State<LoginViewForm> {
                     CustomTextFormField(
                       suffixIcon: Icons.visibility,
                       onPressedSuffix: () {
-                        obscureText = false;
-                        setState(() {
-                          
-                        });
+                        // obscureText = false;
+                        // setState(() {
+
+                        // });
                       },
-                      obscureText: obscureText,
+                      // obscureText: obscureText,
                       hintText: 'password',
                       prefixIcon: Icons.lock,
                       onChanged: (value) {

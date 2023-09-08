@@ -1,14 +1,22 @@
 import 'package:chat_app2/constant.dart';
+import 'package:chat_app2/models/message_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../widgets/custom_text_field.dart';
 
 class ChatView extends StatelessWidget {
   static String id = 'Chat View';
-  const ChatView({super.key});
+  ChatView({super.key, this.message});
+
+  final MessageModel? message;
 
   @override
   Widget build(BuildContext context) {
+    String email = ModalRoute.of(context)!.settings.arguments as String;
+    CollectionReference messages =
+        FirebaseFirestore.instance.collection(kMessageCollection);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -38,14 +46,15 @@ class ChatView extends StatelessWidget {
                             topLeft: Radius.circular(16),
                             topRight: Radius.circular(16),
                             bottomRight: Radius.circular(16))),
-                    child: const Wrap(
+                    child: Wrap(
                       alignment: WrapAlignment.end,
                       children: [
                         Text(
-                          'kfskdljlskdjklsdklsdfjklfs',
-                          style: TextStyle(fontSize: 18),
+                          ' message!.message',
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Text('25')
+                        Text(
+                            'DateFormat.jm().format(message!.createdAt.toDate()).toString()')
                       ],
                     ),
                   ),
@@ -53,9 +62,14 @@ class ChatView extends StatelessWidget {
               },
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 8),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 8),
             child: CustomTextField(
+              onSubmitted: (value) {
+                messages.add(
+                    {kMessage: value, kId: email, kCreatedAt: DateTime.now()});
+              },
               text: 'send message',
               icon: Icons.send,
             ),

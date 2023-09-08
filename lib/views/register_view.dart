@@ -21,7 +21,7 @@ class RegisterView extends StatelessWidget {
           if (state is RegisterLoading) {
             isLoading = true;
           } else if (state is RegisterSuccess) {
-            Navigator.pushNamed(context, ChatView.id);
+            Navigator.pushNamed(context, ChatView.id,arguments: email);
             isLoading = false;
           } else if (state is RegisterFailure) {
             showSnackBar(context, state.errMessage);
