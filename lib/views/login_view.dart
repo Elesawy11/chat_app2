@@ -1,7 +1,7 @@
+import 'package:chat_app2/cubits/chat_cubit/cubit/chat_cubit.dart';
 import 'package:chat_app2/cubits/login_cubit/cubit/login_cubit.dart';
 import 'package:chat_app2/views/chat_view.dart';
 
-import 'package:chat_app2/widgets/login_view_form.dart';
 import 'package:chat_app2/widgets/show_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +27,7 @@ class LoginView extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
+          BlocProvider.of<ChatCubit>(context).getMessage();
           Navigator.pushNamed(context, ChatView.id, arguments: email);
           isLoading = false;
         } else if (state is LoginFailure) {

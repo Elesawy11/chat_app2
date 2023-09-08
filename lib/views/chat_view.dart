@@ -1,22 +1,38 @@
-import 'package:chat_app2/constant.dart';
-import 'package:chat_app2/models/message_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+// ignore_for_file: must_be_immutable
 
+import 'package:chat_app2/constant.dart';
+import 'package:chat_app2/cubits/chat_cubit/cubit/chat_cubit.dart';
+import 'package:chat_app2/models/message_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../widgets/chat_bubble.dart';
 import '../widgets/custom_text_field.dart';
 
-class ChatView extends StatelessWidget {
+class ChatView extends StatefulWidget {
   static String id = 'Chat View';
-  ChatView({super.key, this.message});
+  ChatView({
+    super.key,
+    this.message,
+  });
 
   final MessageModel? message;
 
   @override
+  State<ChatView> createState() => _ChatViewState();
+}
+
+class _ChatViewState extends State<ChatView> {
+  List<MessageModel> messageList = [];
+
+  final TextEditingController controller = TextEditingController();
+
+  final ScrollController scrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) {
     String email = ModalRoute.of(context)!.settings.arguments as String;
-    CollectionReference messages =
-        FirebaseFirestore.instance.collection(kMessageCollection);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -31,34 +47,21 @@ class ChatView extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 16),
-                    decoration: const BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                            bottomRight: Radius.circular(16))),
-                    child: Wrap(
-                      alignment: WrapAlignment.end,
-                      children: [
-                        Text(
-                          ' message!.message',
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                            'DateFormat.jm().format(message!.createdAt.toDate()).toString()')
-                      ],
-                    ),
-                  ),
-                );
+            child: BlocConsumer<ChatCubit, ChatState>(
+              listener: (context, state) {
+                if (state is ChatSuccess) {
+                  messageList = state.messages;
+                }
+              },
+              builder: (context, state) {
+                return ListView.builder(
+                    controller: scrollController,
+                    itemCount: messageList.length,
+                    itemBuilder: (context, index) {
+                      return ChatBubble(
+                        message: messageList[index],
+                      );
+                    });
               },
             ),
           ),
@@ -66,9 +69,16 @@ class ChatView extends StatelessWidget {
             padding:
                 const EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 8),
             child: CustomTextField(
-              onSubmitted: (value) {
-                messages.add(
-                    {kMessage: value, kId: email, kCreatedAt: DateTime.now()});
+              controller: controller,
+              onSubmitted: (message) {
+                BlocProvider.of<ChatCubit>(context)
+                    .sendMessage(message: message, email: email);
+                controller.clear();
+                scrollController.animateTo(
+                  scrollController.position.maxScrollExtent,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.fastOutSlowIn,
+                );
               },
               text: 'send message',
               icon: Icons.send,
