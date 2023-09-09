@@ -55,12 +55,19 @@ class _ChatViewState extends State<ChatView> {
               },
               builder: (context, state) {
                 return ListView.builder(
+                  reverse: true,
                     controller: scrollController,
                     itemCount: messageList.length,
                     itemBuilder: (context, index) {
-                      return ChatBubble(
-                        message: messageList[index],
-                      );
+                      if (messageList[index].id == email) {
+                        return ChatBubble(
+                          message: messageList[index],
+                        );
+                      } else {
+                        return ChatBubbleForFriend(
+                          message: messageList[index],
+                        );
+                      }
                     });
               },
             ),
@@ -73,9 +80,10 @@ class _ChatViewState extends State<ChatView> {
               onSubmitted: (message) {
                 BlocProvider.of<ChatCubit>(context)
                     .sendMessage(message: message, email: email);
+                  
                 controller.clear();
                 scrollController.animateTo(
-                  scrollController.position.maxScrollExtent,
+                  scrollController.position.minScrollExtent,
                   duration: const Duration(seconds: 1),
                   curve: Curves.fastOutSlowIn,
                 );

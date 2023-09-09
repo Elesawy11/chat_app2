@@ -7,7 +7,8 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.prefixIcon,
     this.obscureText = false,
-    this.suffixIcon, this.onPressedSuffix,
+    this.suffixIcon,
+    this.onPressedSuffix,
   });
   final void Function(String)? onChanged;
   final String? hintText;
@@ -33,7 +34,7 @@ class CustomTextFormField extends StatelessWidget {
           color: Colors.black,
         ),
         suffixIcon: IconButton(
-          onPressed:onPressedSuffix,
+          onPressed: onPressedSuffix,
           icon: Icon(
             suffixIcon,
             color: Colors.black,
