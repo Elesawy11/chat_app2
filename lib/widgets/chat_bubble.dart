@@ -33,10 +33,10 @@ class ChatBubble extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 16, top: 8),
+              padding: const EdgeInsets.only(left: 3, top: 6),
               child: Text(
                 DateFormat.jm().format(message.createdAt.toDate()).toString(),
-                style: const TextStyle(fontSize: 14, color: Colors.blueGrey),
+                style: const TextStyle(fontSize: 13, color: Colors.blueGrey),
               ),
             )
           ],
@@ -45,7 +45,6 @@ class ChatBubble extends StatelessWidget {
     );
   }
 }
-
 
 class ChatBubbleForFriend extends StatelessWidget {
   const ChatBubbleForFriend({
@@ -78,10 +77,11 @@ class ChatBubbleForFriend extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 16, top: 8),
+              padding: const EdgeInsets.only(left: 3, top: 6),
               child: Text(
                 DateFormat.jm().format(message.createdAt.toDate()).toString(),
-                style: const TextStyle(fontSize: 14, color: Color.fromARGB(255, 83, 80, 80)),
+                style: const TextStyle(
+                    fontSize: 13, color: Color.fromARGB(255, 83, 80, 80)),
               ),
             )
           ],
@@ -90,4 +90,3 @@ class ChatBubbleForFriend extends StatelessWidget {
     );
   }
 }
-
