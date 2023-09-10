@@ -93,14 +93,9 @@ class RegisterView extends StatelessWidget {
                           height: 20,
                         ),
                         CustomTextFormField(
-                          suffixIcon: Icons.visibility,
-                          onPressedSuffix: () {
-                            // obscureText = false;
-                            // setState(() {
-
-                            // });
-                          },
-                          // obscureText: obscureText,
+                         
+                          
+                          obscureText: true,
                           hintText: 'password',
                           prefixIcon: Icons.lock,
                           onChanged: (value) {

@@ -19,6 +19,7 @@ class ChatCubit extends Cubit<ChatState> {
       kMessage: message,
       kId: email,
       kCreatedAt: DateTime.now(),
+      kName: email.substring(0, 1).toUpperCase()
     });
   }
 

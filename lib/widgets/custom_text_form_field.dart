@@ -7,19 +7,19 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.prefixIcon,
     this.obscureText = false,
-    this.suffixIcon,
-    this.onPressedSuffix,
+    this.suffixIcon, this.onFieldSubmitted,
   });
   final void Function(String)? onChanged;
   final String? hintText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool obscureText;
-  final void Function()? onPressedSuffix;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onFieldSubmitted:onFieldSubmitted ,
       obscureText: obscureText,
       validator: (value) {
         if (value!.isEmpty) {
@@ -32,13 +32,6 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: Icon(
           prefixIcon,
           color: Colors.black,
-        ),
-        suffixIcon: IconButton(
-          onPressed: onPressedSuffix,
-          icon: Icon(
-            suffixIcon,
-            color: Colors.black,
-          ),
         ),
         hintText: hintText,
         border: OutlineInputBorder(

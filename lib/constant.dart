@@ -6,3 +6,4 @@ const kMessage = 'message';
 const kId = 'id';
 const kCreatedAt = 'created at';
 const kMessageCollection = 'messages';
+const kName = 'name';

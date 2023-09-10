@@ -55,18 +55,33 @@ class _ChatViewState extends State<ChatView> {
               },
               builder: (context, state) {
                 return ListView.builder(
-                  reverse: true,
+                    reverse: true,
                     controller: scrollController,
                     itemCount: messageList.length,
                     itemBuilder: (context, index) {
                       if (messageList[index].id == email) {
-                        return ChatBubble(
-                          message: messageList[index],
-                        );
+                        return Row(children: [
+                          CircleAvatar(
+                            backgroundColor:const Color(0xffF4B9B8),
+                            child: Text(messageList[index].name),
+                          ),
+                          ChatBubble(
+                            message: messageList[index],
+                          ),
+                        ]);
                       } else {
-                        return ChatBubbleForFriend(
-                          message: messageList[index],
-                        );
+                        return Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ChatBubbleForFriend(
+                                message: messageList[index],
+                              ),
+                              CircleAvatar(
+                                backgroundColor:const Color(0xffF4B9B8),
+                                child:
+                                    Text(messageList[index].name),
+                              ),
+                            ]);
                       }
                     });
               },
@@ -80,7 +95,7 @@ class _ChatViewState extends State<ChatView> {
               onSubmitted: (message) {
                 BlocProvider.of<ChatCubit>(context)
                     .sendMessage(message: message, email: email);
-                  
+
                 controller.clear();
                 scrollController.animateTo(
                   scrollController.position.minScrollExtent,
@@ -90,6 +105,13 @@ class _ChatViewState extends State<ChatView> {
               },
               text: 'send message',
               icon: Icons.send,
+              onPressedIcon: () {
+                if (controller.text.isNotEmpty) {
+                  BlocProvider.of<ChatCubit>(context)
+                      .sendMessage(message: controller.text, email: email);
+                }
+                controller.clear();
+              },
             ),
           )
         ],
