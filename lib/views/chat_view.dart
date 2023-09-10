@@ -62,7 +62,8 @@ class _ChatViewState extends State<ChatView> {
                       if (messageList[index].id == email) {
                         return Row(children: [
                           CircleAvatar(
-                            backgroundColor:const Color(0xffF4B9B8),
+                            radius: 20,
+                            backgroundColor: const Color(0xffF4B9B8),
                             child: Text(messageList[index].name),
                           ),
                           ChatBubble(
@@ -77,9 +78,9 @@ class _ChatViewState extends State<ChatView> {
                                 message: messageList[index],
                               ),
                               CircleAvatar(
-                                backgroundColor:const Color(0xffF4B9B8),
-                                child:
-                                    Text(messageList[index].name),
+                                radius: 20,
+                                backgroundColor: const Color(0xffF4B9B8),
+                                child: Text(messageList[index].name),
                               ),
                             ]);
                       }
